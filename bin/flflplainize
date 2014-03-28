@@ -1,0 +1,3 @@
+#!/bin/sh
+DIR=`dirname $0`
+php -r "require_once '${DIR}' . '/../vendor/autoload.php'; (new \FlflPlainize\FlflPlainize)->main();"
