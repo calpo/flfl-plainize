@@ -2,4 +2,7 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-(new \FlflPlainize\FlflPlainize)->main();
+(new \FlflPlainize\FlflPlainize(
+    new NoRewindIterator(new SplFileObject('php://stdin')),
+    new \FlflPlainize\Outputer()
+))->main();
