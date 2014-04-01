@@ -20,6 +20,17 @@ class Line
         $this->init($line);
     }
 
+    /**
+     * plainize JSON to text
+     *
+     * @return string
+     */
+    public function toPlainText()
+    {
+        return date('Y-m-d H:i:s', $this->time) .
+            @implode("¥t", $this->json);
+    }
+
     public function getTime()
     {
         return $this->time;
@@ -42,13 +53,22 @@ class Line
             throw new InvalidLineException();
         }
 
-        list($timestamp, $logname, $json_str) = explode("\t", $line);
+        @list($timestamp, $logname, $json_str) = explode("\t", $line);
+
+        $this->validate_explode_result($timestamp, $logname, $json_str);
 
         $this->time = strtotime($timestamp);
         $this->name = $logname;
         $this->json = json_decode($json_str, true);
 
         $this->validate_init_result();
+    }
+
+    private function validate_explode_result($timestamp, $logname, $json_str)
+    {
+        if (empty($timestamp) || empty($logname) || empty($json_str)) {
+            throw new InvalidLineException('insufficient columns');
+        }
     }
 
     private function validate_init_result()

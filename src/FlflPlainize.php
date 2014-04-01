@@ -27,9 +27,7 @@ class FlflPlainize
                 continue;
             }
 
-            $output_str = print_r($line->getJson(), true);
-
-            $this->outputer->output($output_str);
+            $this->outputer->output($line->toPlainText());
         }
     }
 }

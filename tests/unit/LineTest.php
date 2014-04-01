@@ -42,6 +42,24 @@ class LineTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function toPlainTextReturnsPlainizedJsonData()
+    {
+        $SUT = new Line($this->sampleNormalLine());
+
+        $text = $SUT->toPlainText();
+
+        $this->assertEquals(
+            '2014-03-18 17:25:38' . "¥t" .
+            'f111' . "¥t" .
+            'b111' . "¥t" .
+            'z111',
+            $text
+        );
+    }
+
     private function sampleNormalLine()
     {
         return '2014-03-18T17:25:38+0900'. "\t".
