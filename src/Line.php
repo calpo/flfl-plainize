@@ -5,6 +5,11 @@ use FlflPlainize\Exception\InvalidLineException;
 
 class Line
 {
+    /**
+     * separator for returning text
+     */
+    const TEXT_SEPARATOR = "¥t";
+
     private $time;
     private $name;
     private $json;
@@ -28,22 +33,13 @@ class Line
     public function toPlainText()
     {
         return date('Y-m-d H:i:s', $this->time) .
-            @implode("¥t", $this->json);
+            static::TEXT_SEPARATOR .
+            $this->implode_recursive(static::TEXT_SEPARATOR, $this->json);
     }
 
     public function getTime()
     {
         return $this->time;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getJson()
-    {
-        return $this->json;
     }
 
     private function init($line)
@@ -82,5 +78,25 @@ class Line
         if (!is_array($this->json)) {
             throw new InvalidLineException('invalid json');
         }
+    }
+
+    private function implode_recursive($glue, $pieces) {
+        if (!$pieces) {
+            return '';
+        }
+
+        $ret = '';
+
+        foreach ($pieces as $item) {
+            if (is_array($item)) {
+                $ret .= $this->implode_recursive($glue, $item) . $glue;
+            } else {
+                $ret .= $item . $glue;
+            }
+        }
+
+        $ret = substr($ret, 0, 0 - strlen($glue));
+
+        return $ret;
     }
 }

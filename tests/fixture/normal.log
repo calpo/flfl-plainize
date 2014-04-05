@@ -1,3 +1,3 @@
-2014-03-18T17:25:38+0900	some-log-name	{"timestamp":"2014-03-18T17:25:38+09:00","foo":"f111","data":{"bar":"b111","buz":"z111"}}
-2014-03-18T17:26:38+0900	some-log-name	{"timestamp":"2014-03-18T17:26:38+09:00","foo":"f222","data":{"bar":"b222","buz":"z222"}}
-2014-03-18T17:27:38+0900	some-log-name	{"timestamp":"2014-03-18T17:27:38+09:00","foo":"f333","data":{"bar":"b333","buz":"z333"}}
+2014-03-18T17:25:38+0900	some-log-name	{"foo":"f111","data":{"bar":"b111","buz":"z111"}}
+2014-03-18T17:26:38+0900	some-log-name	{"foo":"f222","data":{"bar":"b222","buz":"z222"}}
+2014-03-18T17:27:38+0900	some-log-name	{"foo":"f333","data":{"bar":"b333","buz":"z333"}}
