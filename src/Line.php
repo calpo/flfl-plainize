@@ -28,13 +28,17 @@ class Line
     /**
      * plainize JSON to text
      *
+     * @param  array  $keys  keys to include in response text
+     *                       separate with "." to specify value in multidimension array
      * @return string
      */
-    public function toPlainText()
+    public function toPlainText(array $keys = null)
     {
+        $data = $this->filter($keys, $this->json);
+
         return date('Y-m-d H:i:s', $this->time) .
             static::TEXT_SEPARATOR .
-            $this->implode_recursive(static::TEXT_SEPARATOR, $this->json);
+            $this->implode_recursive(static::TEXT_SEPARATOR, $data);
     }
 
     public function getTime()
@@ -98,5 +102,34 @@ class Line
         $ret = substr($ret, 0, 0 - strlen($glue));
 
         return $ret;
+    }
+
+    private function filter($keys, $arr)
+    {
+        if (!$keys) {
+            return $arr;
+        }
+
+        $result = [];
+        foreach ($keys as $key) {
+            $result[] = $this->getFilteredArray($key, $arr);
+        }
+
+        return $result;
+    }
+
+    private function getFilteredArray($dot_separated_key, $arr)
+    {
+        $keys = explode('.', $dot_separated_key);
+
+        $cursor = &$arr;
+        foreach ($keys as $key) {
+            if (!array_key_exists($key, $cursor)) {
+                break;
+            }
+            $cursor = &$cursor[$key];
+        }
+
+        return $cursor;
     }
 }

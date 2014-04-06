@@ -46,21 +46,45 @@ class LineTest extends \PHPUnit_Framework_TestCase
     {
         $SUT = new Line($this->sampleNormalLine());
 
-        $text = $SUT->toPlainText();
-
         $this->assertEquals(
             '2014-03-18 17:25:38' . "¥t" .
             'f111' . "¥t" .
             'b111' . "¥t" .
-            'z111',
-            $text
+            'u111' . "¥t" .
+            'u222',
+            $SUT->toPlainText()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function toPlainTextFiltersJsonArray()
+    {
+        $SUT = new Line($this->sampleNormalLine());
+
+        $keys = [
+            'data.buz',
+            'data.buz.buz2',
+        ];
+
+        $this->assertEquals("2014-03-18 17:25:38¥tu111¥tu222¥tu222", $SUT->toPlainText($keys));
     }
 
     private function sampleNormalLine()
     {
+        $json = json_encode([
+            'foo'  => 'f111',
+            'data' => [
+                'bar' => 'b111',
+                'buz' => [
+                    'buz1' => 'u111',
+                    'buz2' => 'u222',
+                ],
+            ],
+        ]);
         return '2014-03-18T17:25:38+0900'. "\t".
             'some-log-name' . "\t" .
-            '{"foo":"f111","data":{"bar":"b111","buz":"z111"}}';
+            $json;
     }
 }
