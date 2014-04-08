@@ -26,7 +26,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
      */
     public function whenInvalidLineGivenItThrowsException($line, $purpose)
     {
-        $SUT = new Line($line);
+        new Line($line);
     }
 
     public function invalidLines()
