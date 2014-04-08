@@ -3,7 +3,7 @@
  * This file is part of flfl-plainize.
  */
 
-namespace FlflPlainize\Tests\Unit;
+namespace FlflPlainize\Tests;
 
 use FlflPlainize\FlflPlainize;
 
