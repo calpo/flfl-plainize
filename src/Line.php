@@ -8,7 +8,7 @@ class Line
     /**
      * separator for returning text
      */
-    const TEXT_SEPARATOR = "¥t";
+    const TEXT_SEPARATOR = "\t";
 
     private $time;
     private $name;

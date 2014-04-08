@@ -47,10 +47,10 @@ class LineTest extends \PHPUnit_Framework_TestCase
         $SUT = new Line($this->sampleNormalLine());
 
         $this->assertEquals(
-            '2014-03-18 17:25:38' . "¥t" .
-            'f111' . "¥t" .
-            'b111' . "¥t" .
-            'u111' . "¥t" .
+            '2014-03-18 17:25:38' . Line::TEXT_SEPARATOR .
+            'f111' . Line::TEXT_SEPARATOR .
+            'b111' . Line::TEXT_SEPARATOR .
+            'u111' . Line::TEXT_SEPARATOR .
             'u222',
             $SUT->toPlainText()
         );
@@ -68,7 +68,13 @@ class LineTest extends \PHPUnit_Framework_TestCase
             'data.buz.buz2',
         ];
 
-        $this->assertEquals("2014-03-18 17:25:38¥tu111¥tu222¥tu222", $SUT->toPlainText($keys));
+        $this->assertEquals(
+            "2014-03-18 17:25:38" . Line::TEXT_SEPARATOR .
+            "u111" . Line::TEXT_SEPARATOR .
+            "u222" . Line::TEXT_SEPARATOR .
+            "u222",
+            $SUT->toPlainText($keys)
+        );
     }
 
     private function sampleNormalLine()
