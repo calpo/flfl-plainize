@@ -32,9 +32,13 @@ class Line
      *                       separate with "." to specify value in multidimension array
      * @return string
      */
-    public function toPlainText(array $keys = null)
+    public function toPlainText(Array $keys = null)
     {
-        $data = $this->filter($keys, $this->json);
+        if ($keys) {
+            $data = $this->filter($keys, $this->json);
+        } else {
+            $data = $this->json;
+        }
 
         return date('Y-m-d H:i:s', $this->time) .
             static::TEXT_SEPARATOR .
@@ -107,7 +111,7 @@ class Line
     private function filter($keys, $arr)
     {
         if (!$keys) {
-            return $arr;
+            return [];
         }
 
         $result = [];
@@ -125,7 +129,7 @@ class Line
         $cursor = &$arr;
         foreach ($keys as $key) {
             if (!array_key_exists($key, $cursor)) {
-                break;
+                return [];
             }
             $cursor = &$cursor[$key];
         }

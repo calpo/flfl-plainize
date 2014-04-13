@@ -58,23 +58,42 @@ class LineTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @dataProvider getKeyTestData
      */
-    public function toPlainTextFiltersJsonArray()
+    public function toPlainTextFiltersJsonArray($keys, $expect)
     {
         $SUT = new Line($this->sampleNormalLine());
 
-        $keys = [
-            'data.buz',
-            'data.buz.buz2',
-        ];
-
         $this->assertEquals(
             "2014-03-18 17:25:38" . Line::TEXT_SEPARATOR .
-            "u111" . Line::TEXT_SEPARATOR .
-            "u222" . Line::TEXT_SEPARATOR .
-            "u222",
+            implode(Line::TEXT_SEPARATOR, $expect),
             $SUT->toPlainText($keys)
         );
+    }
+
+    public function getKeyTestData()
+    {
+        return [
+            [
+                ['foo'],
+                ['f111'],
+            ], [
+                ['data.bar'],
+                ['b111'],
+            ], [
+                ['data.buz'],
+                ['u111', 'u222'],
+            ], [
+                ['data.buz', 'data.buz.buz2'],
+                ['u111', 'u222', 'u222'],
+            ], [
+                ['invalid'],
+                [],
+            ], [
+                ['data.invalid'],
+                [],
+            ]
+        ];
     }
 
     private function sampleNormalLine()
