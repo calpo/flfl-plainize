@@ -17,7 +17,7 @@ class FlflPlainize
         $this->outputer = $outputer;
     }
 
-    public function main()
+    public function main(Array $keys)
     {
         foreach ($this->input as $line_str) {
             try {
@@ -27,7 +27,7 @@ class FlflPlainize
                 continue;
             }
 
-            $this->outputer->output($line->toPlainText());
+            $this->outputer->output($line->toPlainText($keys));
         }
     }
 }

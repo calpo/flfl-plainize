@@ -52,6 +52,6 @@ class FlflPlainizeTest extends \PHPUnit_Framework_TestCase
             ->method('output')
             ->withAnyParameters();
 
-        $SUT->main();
+        $SUT->main([]);
     }
 }

@@ -2,7 +2,11 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$option = new \FlflPlainize\Option(\Flflplainize\Option::getopt());
+
+print_r($option->getKeys());
+
 (new \FlflPlainize\FlflPlainize(
     new NoRewindIterator(new SplFileObject('php://stdin')),
     new \FlflPlainize\Outputer()
-))->main();
+))->main($option->getKeys());
