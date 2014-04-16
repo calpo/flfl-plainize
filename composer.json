@@ -1,5 +1,6 @@
 {
     "name": "calpo/flfl-plainize",
+    "bin": ["bin/flflplainize"],
     "description": "convert log format. from fluent/fluent-logger-php::FileLogger to plain text.",
     "keywords": ["fluent", "logger", "fluent-logger-php"],
     "type": "library",
