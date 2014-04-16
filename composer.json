@@ -1,6 +1,9 @@
 {
     "name": "calpo/flfl-plainize",
-    "description": "convert log format. from fluent-logger::FileLogger to plain text.",
+    "description": "convert log format. from fluent/fluent-logger-php::FileLogger to plain text.",
+    "keywords": ["fluent", "logger", "fluent-logger-php"],
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "calpo",
