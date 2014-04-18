@@ -9,6 +9,19 @@ use FlflPlainize\Line;
 
 class LineTest extends \PHPUnit_Framework_TestCase
 {
+    private $original_timezone;
+
+    public function setUp()
+    {
+        $this->original_timezone = date_default_timezone_get();
+        date_default_timezone_set('Asia/Tokyo');
+    }
+
+    public function tearDown()
+    {
+        date_default_timezone_set($this->original_timezone);
+    }
+
     /**
      * @test
      */
