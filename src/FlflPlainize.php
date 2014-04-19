@@ -22,7 +22,7 @@ class FlflPlainize
         foreach ($this->input as $line_str) {
             try {
                 $line = new Line($line_str);
-            } catch(InvalidLineException $e) {
+            } catch (InvalidLineException $e) {
                 $this->outputer->output($line_str);
                 continue;
             }
