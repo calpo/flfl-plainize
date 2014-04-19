@@ -47,6 +47,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
         return array(
             array("", 'empty.'),
             array("invalid_time\tlogname\t{}", 'invalid time format.'),
+            array("2014-03-18T17:26:38+09:00", 'insufficient column.'),
             array("2014-03-18T17:26:38+09:00\tlogname", 'insufficient column.'),
             array("2014-03-18T17:26:38+09:00\tlogname\t{in::valid}", 'invalid json.'),
         );

@@ -45,11 +45,6 @@ class Line
             $this->implodeRecursive(static::TEXT_SEPARATOR, $data);
     }
 
-    public function getTime()
-    {
-        return $this->time;
-    }
-
     private function init($line)
     {
         $line = trim($line);
@@ -80,9 +75,6 @@ class Line
         if (empty($this->time)) {
             throw new InvalidLineException('invalid timestamp');
         }
-        if (empty($this->name)) {
-            throw new InvalidLineException('invalid timestamp');
-        }
         if (!is_array($this->json)) {
             throw new InvalidLineException('invalid json');
         }
@@ -111,10 +103,6 @@ class Line
 
     private function filter($keys, $arr)
     {
-        if (!$keys) {
-            return [];
-        }
-
         $result = [];
         foreach ($keys as $key) {
             $result[] = $this->getFilteredArray($key, $arr);
