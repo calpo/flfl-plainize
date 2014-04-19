@@ -42,7 +42,7 @@ class Line
 
         return date('Y-m-d H:i:s', $this->time) .
             static::TEXT_SEPARATOR .
-            $this->implode_recursive(static::TEXT_SEPARATOR, $data);
+            $this->implodeRecursive(static::TEXT_SEPARATOR, $data);
     }
 
     public function getTime()
@@ -59,23 +59,23 @@ class Line
 
         @list($timestamp, $logname, $json_str) = explode("\t", $line);
 
-        $this->validate_explode_result($timestamp, $logname, $json_str);
+        $this->validateExplodeResult($timestamp, $logname, $json_str);
 
         $this->time = strtotime($timestamp);
         $this->name = $logname;
         $this->json = json_decode($json_str, true);
 
-        $this->validate_init_result();
+        $this->validateInitResult();
     }
 
-    private function validate_explode_result($timestamp, $logname, $json_str)
+    private function validateExplodeResult($timestamp, $logname, $json_str)
     {
         if (empty($timestamp) || empty($logname) || empty($json_str)) {
             throw new InvalidLineException('insufficient columns');
         }
     }
 
-    private function validate_init_result()
+    private function validateInitResult()
     {
         if (empty($this->time)) {
             throw new InvalidLineException('invalid timestamp');
@@ -88,7 +88,8 @@ class Line
         }
     }
 
-    private function implode_recursive($glue, $pieces) {
+    private function implodeRecursive($glue, $pieces)
+    {
         if (!$pieces) {
             return '';
         }
@@ -97,7 +98,7 @@ class Line
 
         foreach ($pieces as $item) {
             if (is_array($item)) {
-                $ret .= $this->implode_recursive($glue, $item) . $glue;
+                $ret .= $this->implodeRecursive($glue, $item) . $glue;
             } else {
                 $ret .= $item . $glue;
             }
