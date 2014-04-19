@@ -17,5 +17,5 @@ $option = new \FlflPlainize\Option(\Flflplainize\Option::getopt());
 
 (new \FlflPlainize\FlflPlainize(
     new NoRewindIterator(new SplFileObject('php://stdin')),
-    new \FlflPlainize\Outputer()
+    new \FlflPlainize\Outputter()
 ))->main($option->getKeys());

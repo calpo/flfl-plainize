@@ -9,12 +9,12 @@ use Iterator;
 class FlflPlainize
 {
     private $input;
-    private $outputer;
+    private $outputter;
 
-    public function __construct(Iterator $input, Outputer $outputer)
+    public function __construct(Iterator $input, Outputter $outputter)
     {
         $this->input = $input;
-        $this->outputer = $outputer;
+        $this->outputter = $outputter;
     }
 
     public function main(Array $keys)
@@ -23,11 +23,11 @@ class FlflPlainize
             try {
                 $line = new Line($line_str);
             } catch (InvalidLineException $e) {
-                $this->outputer->output($line_str);
+                $this->outputter->output($line_str);
                 continue;
             }
 
-            $this->outputer->output($line->toPlainText($keys));
+            $this->outputter->output($line->toPlainText($keys));
         }
     }
 }

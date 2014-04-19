@@ -6,7 +6,7 @@
 namespace FlflPlainize;
 
 
-class Outputer
+class Outputter
 {
     /**
      * @param  string  $str  string to output

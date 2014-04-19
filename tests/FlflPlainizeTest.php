@@ -12,11 +12,11 @@ class FlflPlainizeTest extends \PHPUnit_Framework_TestCase
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
-    private $outputer;
+    private $outputter;
 
     public function setUp()
     {
-        $this->outputer = $this->getMock('\FlflPlainize\Outputer');
+        $this->outputter = $this->getMock('\FlflPlainize\Outputter');
     }
 
     /**
@@ -25,7 +25,7 @@ class FlflPlainizeTest extends \PHPUnit_Framework_TestCase
      */
     public function itIsInitializableWithIterator($input)
     {
-        $SUT = new FlflPlainize($input, $this->outputer);
+        $SUT = new FlflPlainize($input, $this->outputter);
         $this->assertInstanceOf('\FlflPlainize\FlflPlainize', $SUT);
     }
 
@@ -45,9 +45,9 @@ class FlflPlainizeTest extends \PHPUnit_Framework_TestCase
     public function itOutputLinsByPlainText()
     {
         $file = ROOT . '/tests/fixture/normal.log';
-        $SUT = new FlflPlainize(new \SplFileObject($file), $this->outputer);
+        $SUT = new FlflPlainize(new \SplFileObject($file), $this->outputter);
 
-        $this->outputer
+        $this->outputter
             ->expects($this->atLeastOnce())
             ->method('output')
             ->withAnyParameters();
