@@ -2,7 +2,7 @@
 
 <phpunit colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
-        <testsuite name="Behat test suite">
+        <testsuite name="flfl-plainize test suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
@@ -15,4 +15,10 @@
 			</exclude>
         </whitelist>
     </filter>
+
+    <groups>
+        <exclude>
+            <group>xfail</group>
+        </exclude>
+    </groups>
 </phpunit>
