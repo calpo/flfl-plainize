@@ -6,6 +6,9 @@
 namespace FlflPlainize\Tests\acceptance;
 
 
+/**
+ * @coversNothing
+ */
 class BinFlflPlainizeTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()

@@ -16,6 +16,9 @@ class Option
         $this->keys = $this->mergeMultipleOption($this->keys, $opts, 'key');
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public static function getopt()
     {
         return getopt(
