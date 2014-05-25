@@ -20,6 +20,7 @@ class FlflPlainize
     public function main(Array $keys)
     {
         foreach ($this->input as $line_str) {
+            $line_str = trim($line_str);
             try {
                 $line = new Line($line_str);
             } catch (InvalidLineException $e) {

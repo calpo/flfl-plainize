@@ -11,22 +11,30 @@ namespace FlflPlainize\Tests\Acceptance;
  */
 class FlflPlainizeTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-        exec('cd ' . ROOT);
-    }
+	private $fixtureDir;
+	private $normalLog;
+	private $cmd;
+
+	public function setUp()
+	{
+		$this->fixtureDir = ROOT . '/tests/fixture';
+		$this->normalLog = $this->fixtureDir . '/normal.log';
+		$this->cmd = ROOT . '/bin/flflplainize';
+	}
 
     /**
      * @test
-     * @group xfail
-     *        known bug. mysterious empty line was added to output.
      */
     public function itReceivesStdinAndOutputsToStdout()
     {
-        exec('cat tests/fixture/normal.log | bin/flflplainize -k foo --key data.buz', $output, $retval);
+        exec(
+			"cat {$this->normalLog} | {$this->cmd} -k foo --key data.buz",
+            $output,
+            $retval
+        );
 
         $this->assertEquals(0, $retval);
-        $this->assertCount(3, $output);
+        $this->assertCount(count(file($this->normalLog)) + 1, $output);
     }
 
     /**
@@ -34,7 +42,11 @@ class FlflPlainizeTest extends \PHPUnit_Framework_TestCase
      */
     public function itConvertsLogFormatToPlainText()
     {
-        exec('cat tests/fixture/normal.log | bin/flflplainize -k foo --key data.buz', $output, $retval);
+        exec(
+			"cat {$this->normalLog} | {$this->cmd} -k foo --key data.buz",
+            $output,
+            $retval
+        );
 
         list($date, $firstItem, $secondItem) = explode("\t", $output[0]);
 
